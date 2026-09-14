@@ -14,7 +14,7 @@ Accessories is a Better Than Wolves Community Edition addon for Minecraft 1.6.4.
 
 - Java 17
 - Minecraft 1.6.4
-- Better Than Wolves Community Edition 3.1.0
+- Better Than Wolves Community Edition 3.1.1
 - Fabric Loader 0.18.4 or newer
 
 Both the client and server need the addon installed for the accessory inventory and effects to work in multiplayer.
@@ -50,8 +50,6 @@ On Windows, use `gradlew.bat build`. The built addon JAR is written to `build/li
 - `src/main/java/btw/community/accessories/` — addon initialization, recipes, and gameplay helpers.
 - `src/main/java/net/fabricmc/accessories/` — accessory inventory, container, GUI, items, and mixins.
 - `src/main/resources/` — Fabric/BTW metadata, mixin configuration, translations, textures, and other assets.
-- `BTWSRC/` — read-only reference source for BTW and vanilla Minecraft; it is not addon source code.
-- `build_BTW/` and `custom_mappings/` — generated local development inputs.
 
 ## License
 
