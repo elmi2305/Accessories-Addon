@@ -8,7 +8,6 @@ import net.fabricmc.accessories.ContainerAccessories;
 import net.fabricmc.accessories.IPlayerAccessories;
 import net.fabricmc.accessories.items.ACItems;
 import net.minecraft.src.*;
-import org.lwjgl.input.Keyboard;
 
 import java.io.*;
 import java.util.*;
@@ -104,15 +103,14 @@ public class AccessoriesAddon extends BTWAddon {
 //        }
 //    }
 
-
-
-    public KeyBinding accessoryKeyBind;
-    public static String accessoryKey;
-
     @Override
     public void preInitialize() {
         super.preInitialize();
     }
+
+    /*
+    public KeyBinding accessoryKeyBind;
+    public static String accessoryKey;
 
     @Override
     public void registerConfigProperties(AddonConfig config) {
@@ -136,6 +134,8 @@ public class AccessoriesAddon extends BTWAddon {
         keyBindings[keyBindings.length - 1] = accessoryKeyBind;
         settings.keyBindings = keyBindings;
     }
+    */
+
     public void modifyConfigProperty(String propertyName, String newValue) {
         String filename = "config/" + "accessories" + ".properties";
         File config = new File(filename);
