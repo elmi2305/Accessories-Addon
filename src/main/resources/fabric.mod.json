@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "accessories",
+  "version": "${version}",
+  "name": "Accessories",
+  "description": "Adds tons of trinkets / accessories to BTW.",
+  "authors": [
+    "elmi2305"
+  ],
+  "contact": {
+    "homepage": "https://legacyfabric.net/",
+    "sources": "https://github.com/elmi2305/Accessories-Addon"
+  },
+  "license": "MIT",
+  "icon": "assets/accessories/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.fabricmc.accessories.Accessories"
+    ],
+    "btw:addon": [
+      "btw.community.accessories.AccessoriesAddon"
+    ]
+  },
+  "custom": {
+    "btw:addon_prefix": "AC"
+  },
+  "mixins": [
+    "accessories.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.19",
+    "minecraft": "1.6.4"
+  }
+}

@@ -1,0 +1,36 @@
+# Gradle and build output
+.gradle/
+build/
+build_BTW/
+out/
+classes/
+
+# Generated BTW development environment (created by install.bat/install.sh)
+/build_BTW/
+/custom_mappings/
+/BTW-CE-Intermediary-Distribution-*.zip
+/BTWCE * Intermediary Distribution.zip
+
+# eclipse
+*.launch
+
+# idea
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# vscode
+.settings/
+.vscode/
+bin/
+.classpath
+.project
+
+# fabric
+run/
+
+# macos
+*.DS_Store
+/build_BTW/
+/build_BTW/BTW_dev/

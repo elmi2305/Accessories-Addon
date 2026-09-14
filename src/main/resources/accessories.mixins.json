@@ -1,0 +1,40 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.fabricmc.accessories.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "BlockGlassMixin",
+    "BlockLogMixin",
+    "BlockPortalMixin",
+    "BTWEntityMapperMixin",
+    "BTWSquidEntityMixin",
+    "ContainerPlayerMixin",
+    "EntityAccessor",
+    "EntityAINearestAttackableTargetMixin",
+    "EntityCreeperMixin",
+    "EntityDragonMixin",
+    "EntityItemMixin",
+    "EntityLivingBaseMixin",
+    "EntityPlayerMixin",
+    "EntityPlayerMPAccessor",
+    "EntitySkeletonMixin",
+    "EntityWitherMixin",
+    "FireStarterItemMixin",
+    "FoodStatsMixin",
+    "MultiTemptBehaviorMixin",
+    "PlayerControllerMPMixin",
+    "ProgressiveCraftingItemMixin"
+  ],
+  "client": [
+    "BTWRenderMapperMixin",
+    "GameSettingsMixin",
+    "GuiContainerMixin",
+    "GuiIngameMixin",
+    "GuiInventoryMixin",
+    "NetClientHandlerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
