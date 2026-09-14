@@ -13,7 +13,6 @@ public final class AccessoriesProgressData {
     public static final DataEntry.PlayerDataEntry<Boolean> PORTAL_SLOT_UNLOCKED = playerFlag("AccessoriesPortalSlot");
     public static final DataEntry.PlayerDataEntry<Boolean> WITHER_SLOT_UNLOCKED = playerFlag("AccessoriesWitherSlot");
     public static final DataEntry.PlayerDataEntry<Boolean> DRAGON_SLOT_UNLOCKED = playerFlag("AccessoriesDragonSlot");
-    public static final DataEntry.WorldDataEntry<Boolean> PORTAL_REWARD_DROPPED = worldFlag("AccessoriesPortalRewardDropped");
 
     private AccessoriesProgressData() {}
 
@@ -21,7 +20,6 @@ public final class AccessoriesProgressData {
         PORTAL_SLOT_UNLOCKED.register();
         WITHER_SLOT_UNLOCKED.register();
         DRAGON_SLOT_UNLOCKED.register();
-        PORTAL_REWARD_DROPPED.register();
     }
 
     public static int getAccessorySlotCount(EntityPlayer player) {
@@ -41,15 +39,5 @@ public final class AccessoriesProgressData {
                 .player()
                 .syncPlayer()
                 .buildPlayer();
-    }
-
-    private static DataEntry.WorldDataEntry<Boolean> worldFlag(String name) {
-        return DataProvider.getBuilder(Boolean.class)
-                .name(name)
-                .defaultSupplier(() -> false)
-                .readNBT(NBTTagCompound::getBoolean)
-                .writeNBT(NBTTagCompound::setBoolean)
-                .global()
-                .build();
     }
 }

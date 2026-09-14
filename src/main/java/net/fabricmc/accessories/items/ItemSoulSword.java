@@ -2,12 +2,27 @@ package net.fabricmc.accessories.items;
 
 import net.minecraft.src.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ItemSoulSword extends ItemSword {
     private boolean unbreakable;
+    private final List<String> tooltipLines = new ArrayList<String>();
 
     public ItemSoulSword(int par1, EnumToolMaterial par2EnumToolMaterial) {
         super(par1, par2EnumToolMaterial);
         this.setMaxDamage(10001);
+    }
+
+    public ItemSoulSword addTooltip(String line) {
+        this.tooltipLines.add(line);
+        return this;
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advanced) {
+        list.addAll(this.tooltipLines);
+        super.addInformation(stack, player, list, advanced);
     }
 
     @Override
@@ -43,7 +58,6 @@ public class ItemSoulSword extends ItemSword {
     @Override
     public boolean isDamageable() {
         if(this.unbreakable){
-            System.out.println("unbreakable");
             return false;
         }
         return super.isDamageable();

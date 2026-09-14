@@ -27,6 +27,7 @@
     "ProgressiveCraftingItemMixin"
   ],
   "client": [
+    "BTWPluginMixin",
     "BTWRenderMapperMixin",
     "GameSettingsMixin",
     "GuiContainerMixin",

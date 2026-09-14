@@ -85,9 +85,9 @@ public class ACItems {
     public static Item plantyMush;
     public static Item enderRod;
     public static Item witherDust;
-    public static Item portalSigil;
-    public static Item witheredCore;
-    public static Item dragonHeart;
+    public static Item netherFruit;
+    public static Item witherFruit;
+    public static Item dragonFruit;
 
 
 
@@ -114,9 +114,9 @@ public class ACItems {
         plantyMush = new Item(2715).setUnlocalizedName("acPlantyMush").setCreativeTab(CreativeTabs.tabMaterials).setTextureName("acPlantyMush");
         enderRod = new Item(2716).setUnlocalizedName("acEnderRod").setCreativeTab(CreativeTabs.tabMaterials).setTextureName("acEnderRod");
         witherDust = new Item(2717).setUnlocalizedName("acWitherDust").setCreativeTab(CreativeTabs.tabMaterials).setTextureName("acWitherDust");
-        portalSigil = new ItemAccessorySlotUpgrade(2718, AccessoriesProgressData.PORTAL_SLOT_UNLOCKED).setUnlocalizedName("acPortalSigil").setTextureName("acPortalSigil");
-        witheredCore = new ItemAccessorySlotUpgrade(2719, AccessoriesProgressData.WITHER_SLOT_UNLOCKED).setUnlocalizedName("acWitheredCore").setTextureName("acWitheredCore");
-        dragonHeart = new ItemAccessorySlotUpgrade(2720, AccessoriesProgressData.DRAGON_SLOT_UNLOCKED).setUnlocalizedName("acDragonHeart").setTextureName("acDragonHeart");
+        netherFruit = new ItemAccessorySlotFruit(2718, AccessoriesProgressData.PORTAL_SLOT_UNLOCKED).setUnlocalizedName("acNetherFruit").setTextureName("acFruit1");
+        witherFruit = new ItemAccessorySlotFruit(2719, AccessoriesProgressData.WITHER_SLOT_UNLOCKED).setUnlocalizedName("acWitherFruit").setTextureName("acFruit2");
+        dragonFruit = new ItemAccessorySlotFruit(2720, AccessoriesProgressData.DRAGON_SLOT_UNLOCKED).setUnlocalizedName("acDragonFruit").setTextureName("acFruit3");
     }
 
 
@@ -185,7 +185,7 @@ public class ACItems {
                 .addTooltip("\247eFor when sunglasses just aren’t enough");
         counterScarf = ((AccessoryItem) new AccessoryItem(2614).setUnlocalizedName("acCounterScarf").setTextureName("acCounterScarf"))
                 .addTooltip("\2472Grants a 10% chance to dodge attacks")
-                .addTooltip("\247eEmpty description");
+                .addTooltip("\247eMissed me?");
         tastyTreat = ((AccessoryItem) new AccessoryItem(2615).setUnlocalizedName("acTastyTreat").setTextureName("acTastyTreat"))
                 .addTooltip("\2472Attracts friendly animals")
                 .addTooltip("\247eBest friends forever!");
@@ -219,8 +219,8 @@ public class ACItems {
                 .addTooltip("\247eSelf-sabotage");
         pendantTides = ((AccessoryItem) new AccessoryItem(2623).setUnlocalizedName("acPendantTides").setTextureName("acPendantTides"))
                 .addTooltip("\2472Reduces aggressiveness of Squids")
-                .addTooltip("\2472Squids will not shoot")
-                .addTooltip("\2472tentacles at the player")
+                .addTooltip("\2472Squids will not shoot tentacles")
+                .addTooltip("\2472at the player")
                 .addTooltip("\247eSquid whisperer");
             pendantSea = ((AccessoryItem) new AccessoryItem(2624).setUnlocalizedName("acPendantSeas").setTextureName("acPendantSeas"))
                     .addTooltip("\2472Makes Squids friendly")
@@ -354,6 +354,12 @@ public class ACItems {
 
 
 
-        itemSoulSword = (ItemSoulSword) new ItemSoulSword(2675, EnumToolMaterial.WOOD).setUnlocalizedName("acSoulSword").setTextureName("acSoulSword");
+        itemSoulSword = ((ItemSoulSword) new ItemSoulSword(2675, EnumToolMaterial.WOOD)
+                .setUnlocalizedName("acSoulSword")
+                .setTextureName("acSoulSword"))
+                .addTooltip("\2472Striking mobs repairs the blade")
+                .addTooltip("\2472At full durability, attacks have a 33%")
+                .addTooltip("\2472chance to make mobs drop loot")
+                .addTooltip("\247eThe grind never ends.");
     }
 }

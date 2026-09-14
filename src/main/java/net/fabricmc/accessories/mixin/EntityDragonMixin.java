@@ -17,7 +17,9 @@ public abstract class EntityDragonMixin extends EntityLivingBase {
     }
 
     @Inject(method = "createEnderPortal", at = @At("HEAD"))
-    private void dropDragonHeart(int x, int z, CallbackInfo ci) {
-        this.entityDropItem(new ItemStack(ACItems.dragonHeart), 0.0F);
+    private void dropDragonFruit(int x, int z, CallbackInfo ci) {
+        if (!this.worldObj.isRemote) {
+            this.entityDropItem(new ItemStack(ACItems.dragonFruit), 0.0F);
+        }
     }
 }
