@@ -2,14 +2,15 @@ package btw.community.accessories;
 
 import api.util.color.Color;
 import btw.block.BTWBlocks;
-import btw.crafting.manager.MillStoneCraftingManager;
 import btw.crafting.recipe.RecipeManager;
 import btw.item.BTWItems;
+import btw.item.BTWTags;
 import net.fabricmc.accessories.items.ACItems;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 
+@SuppressWarnings("deprecation")
 public class ACRecipes {
 
     public static void initRecipes(){
@@ -19,9 +20,9 @@ public class ACRecipes {
         RecipeManager.addRecipe(new ItemStack(ACItems.cloudInABottle), new Object[]{
                 " Y ",
                 "X#X",
-                Character.valueOf('#'), Item.glassBottle,
-                Character.valueOf('X'), Item.feather,
-                Character.valueOf('Y'), Item.ghastTear
+                '#', Item.glassBottle,
+                'X', Item.feather,
+                'Y', Item.ghastTear
                 // 1x glass bottle, 1x feather, 1x ghast tear
         });
 
@@ -29,10 +30,10 @@ public class ACRecipes {
                 " R ",
                 "S#S",
                 " G ",
-                Character.valueOf('#'), Item.slimeBall,
-                Character.valueOf('R'), new ItemStack(Item.dyePowder, 1, 1), // red dye
-                Character.valueOf('S'), Item.silk,
-                Character.valueOf('G'), Item.goldNugget
+                '#', Item.slimeBall,
+                'R', new ItemStack(Item.dyePowder, 1, 1), // red dye
+                'S', BTWTags.strings,
+                'G', Item.goldNugget
                 // 1x slimeball, 2x string, 1x gold nugget, 1x red dye
         });
 
@@ -40,10 +41,10 @@ public class ACRecipes {
                 " # ",
                 "FXF",
                 " H ",
-                Character.valueOf('#'), ACItems.cloudInABottle,
-                Character.valueOf('F'), Item.feather,
-                Character.valueOf('H'), BTWItems.hempFibers,
-                Character.valueOf('X'), ACItems.shinyBalloon
+                '#', ACItems.cloudInABottle,
+                'F', Item.feather,
+                'H', BTWItems.hempFibers,
+                'X', ACItems.shinyBalloon
                 // 2x feather, 1x hemp fiber
                 // 1x slimeball, 2x string, 1x gold nugget, 1x red dye
                 // 1x glass bottle, 1x feather, 1x ghast tear
@@ -54,20 +55,20 @@ public class ACRecipes {
                 "G G",
                 "GSG",
                 "I#I",
-                Character.valueOf('#'), Item.ingotGold,
-                Character.valueOf('G'), Item.goldNugget,
-                Character.valueOf('S'), ACItems.stoneEffigy,
-                Character.valueOf('I'), Item.ingotIron
+                '#', Item.ingotGold,
+                'G', Item.goldNugget,
+                'S', ACItems.stoneEffigy,
+                'I', Item.ingotIron
                 // 1x gold ingot, 5x gold nugget, 2x iron ingot
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.bundleBalloons), new Object[]{
                 "ADC",
                 " B ",
-                Character.valueOf('A'), ACItems.shinyBalloon,
-                Character.valueOf('B'), ACItems.cloudBalloon,
-                Character.valueOf('C'), ACItems.shinyBalloon,
-                Character.valueOf('D'), ACItems.binder
+                'A', ACItems.shinyBalloon,
+                'B', ACItems.cloudBalloon,
+                'C', ACItems.shinyBalloon,
+                'D', ACItems.binder
                 // 2x feather, 1x hemp fiber
                 // 2x slimeball, 4x string, 2x gold nugget, 2x red dye
                 // 1x glass bottle, 2x feather, 1x ghast tear
@@ -100,9 +101,9 @@ public class ACRecipes {
                 "#S#",
                 "F#F",
                 "#S#",
-                Character.valueOf('#'), Item.slimeBall,
-                Character.valueOf('S'), Item.silk,
-                Character.valueOf('F'), Item.fishCooked
+                '#', Item.slimeBall,
+                'S', BTWTags.strings,
+                'F', Item.fishCooked
                 // 5x slimeball, 2x string, 2x cooked fish
         });
 
@@ -110,10 +111,10 @@ public class ACRecipes {
                 " S ",
                 "I#I",
                 "RIR",
-                Character.valueOf('#'), Item.bootsIron,
-                Character.valueOf('I'), Item.ingotIron,
-                Character.valueOf('R'), BTWItems.screw,
-                Character.valueOf('S'), ACItems.frogLeg
+                '#', Item.bootsIron,
+                'I', Item.ingotIron,
+                'R', BTWItems.screw,
+                'S', ACItems.frogLeg
                 // 1x iron boots, 3x iron ingot, 2x screw
                 // 5x slimeball, 2x string, 2x cooked fish
         });
@@ -122,11 +123,11 @@ public class ACRecipes {
                 "FRF",
                 "S#S",
                 "YFY",
-                Character.valueOf('#'), Item.slimeBall,
-                Character.valueOf('R'), ACItems.rottenChunk,
-                Character.valueOf('S'), Item.silk,
-                Character.valueOf('Y'), BTWItems.foulFood,
-                Character.valueOf('F'), BTWItems.dung,
+                '#', Item.slimeBall,
+                'R', ACItems.rottenChunk,
+                'S', BTWTags.strings,
+                'Y', BTWItems.foulFood,
+                'F', BTWItems.dung,
                 // 1x slimeball, 2x string, 1x rotten flesh, 2x foul food, 4x dung, 1x oyster, 1x bone, 1x bone meal
         });
 
@@ -134,11 +135,11 @@ public class ACRecipes {
                 "RDR",
                 "P#P",
                 " B ",
-                Character.valueOf('#'), ACItems.putridScent,
-                Character.valueOf('P'), Item.potion,
-                Character.valueOf('R'), ACItems.rottenChunk,
-                Character.valueOf('B'), BTWItems.urn,
-                Character.valueOf('D'), ACItems.basicDyeBlend
+                '#', ACItems.putridScent,
+                'P', Item.potion,
+                'R', ACItems.rottenChunk,
+                'B', BTWItems.urn,
+                'D', ACItems.basicDyeBlend
 
                 // 1x slimeball, 2x string, 3x rotten flesh, 2x foul food, 5x dung, 2x oyster, 2x bone, 2x bone meal
                 // 1x glowstone dust, 2x potion, 1x urn
@@ -149,10 +150,10 @@ public class ACRecipes {
                 "#R#",
                 "SGS",
                 "#R#",
-                Character.valueOf('#'), Item.magmaCream,
-                Character.valueOf('G'), Block.glowStone,
-                Character.valueOf('S'), Item.ingotGold,
-                Character.valueOf('R'), ACItems.emberFabric
+                '#', Item.magmaCream,
+                'G', Block.glowStone,
+                'S', Item.ingotGold,
+                'R', ACItems.emberFabric
                 // 2x redstone, 1x glowstone block, 2x gold ingot, 4x magma cream
                 // 4x hemp fibers, 2x blaze powder, 2x fabric, 1x glowstone
 
@@ -162,10 +163,10 @@ public class ACRecipes {
                 "LBL",
                 "S#S",
                 "LBL",
-                Character.valueOf('#'), new ItemStack(Item.dyePowder, 1, 4),
-                Character.valueOf('B'), Item.bucketWater,
-                Character.valueOf('S'), Item.ingotIron,
-                Character.valueOf('L'), new ItemStack(BTWBlocks.looseCobblestone)
+                '#', new ItemStack(Item.dyePowder, 1, 4),
+                'B', Item.bucketWater,
+                'S', Item.ingotIron,
+                'L', BTWTags.looseCobblestones
                 // 1x lapis, 2x water bucket, 2x iron ingot, 4x cobblestone block
         });
 
@@ -173,22 +174,22 @@ public class ACRecipes {
                 "#AS",
                 "YLY",
                 "SM#",
-                Character.valueOf('#'), ACItems.sunStone,
-                Character.valueOf('S'), ACItems.moonStone,
-                Character.valueOf('M'), Item.diamond,
-                Character.valueOf('A'), ACItems.astralThread,
-                Character.valueOf('Y'), BTWItems.gear,
-                Character.valueOf('L'), ACItems.stoneEffigy
+                '#', ACItems.sunStone,
+                'S', ACItems.moonStone,
+                'M', Item.diamond,
+                'A', ACItems.astralThread,
+                'Y', BTWItems.gear,
+                'L', ACItems.stoneEffigy
         });
         RecipeManager.addRecipe(new ItemStack(ACItems.eyeOfTheSun), new Object[]{
                 "GPD",
                 "ESE",
                 "DPG",
-                Character.valueOf('S'), ACItems.sunStone,
-                Character.valueOf('E'), Item.spiderEye,
-                Character.valueOf('P'), ACItems.stickyAdhesive,
-                Character.valueOf('D'), Item.diamond,
-                Character.valueOf('G'), Item.glowstone,
+                'S', ACItems.sunStone,
+                'E', Item.spiderEye,
+                'P', ACItems.stickyAdhesive,
+                'D', Item.diamond,
+                'G', Item.glowstone,
                 // 2x redstone, 1x glowstone block, 2x gold ingot, 4x magma cream
                 // 4x spider eye, 2x glowstone dust, 2x diamond
         });
@@ -196,11 +197,11 @@ public class ACRecipes {
                 "DPG",
                 "ESE",
                 "GPD",
-                Character.valueOf('S'), ACItems.sunStone,
-                Character.valueOf('E'), Item.spiderEye,
-                Character.valueOf('P'), ACItems.stickyAdhesive,
-                Character.valueOf('D'), Item.diamond,
-                Character.valueOf('G'), Item.glowstone,
+                'S', ACItems.sunStone,
+                'E', Item.spiderEye,
+                'P', ACItems.stickyAdhesive,
+                'D', Item.diamond,
+                'G', Item.glowstone,
                 // 2x redstone, 1x glowstone block, 2x gold ingot, 4x magma cream
                 // 4x spider eye, 2x glowstone dust, 2x diamond
         });
@@ -208,20 +209,20 @@ public class ACRecipes {
                 "BDB",
                 "FEF",
                 "BDB",
-                Character.valueOf('F'), BTWItems.fabric,
-                Character.valueOf('E'), ACItems.enderFabric,
-                Character.valueOf('D'), ACItems.linenCloth,
-                Character.valueOf('B'), ACItems.basicDyeBlend,
+                'F', BTWItems.fabric,
+                'E', ACItems.enderFabric,
+                'D', ACItems.linenCloth,
+                'B', ACItems.basicDyeBlend,
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.tastyTreat), new Object[]{
                 "  P",
                 "WCW",
                 "B  ",
-                Character.valueOf('P'), ACItems.plantyMush,
-                Character.valueOf('C'), BTWItems.carrot,
-                Character.valueOf('B'), Item.bone,
-                Character.valueOf('W'), BTWItems.wheat,
+                'P', ACItems.plantyMush,
+                'C', BTWItems.carrot,
+                'B', Item.bone,
+                'W', BTWItems.wheat,
         });
 
 
@@ -230,20 +231,20 @@ public class ACRecipes {
                 "L L",
                 "RPR",
                 " B ",
-                Character.valueOf('B'), Item.bootsLeather,
-                Character.valueOf('R'), ACItems.basicDyeBlend,
-                Character.valueOf('P'), ACItems.plantyMush,
-                Character.valueOf('L'), ACItems.linenCloth
+                'B', Item.bootsLeather,
+                'R', ACItems.basicDyeBlend,
+                'P', ACItems.plantyMush,
+                'L', ACItems.linenCloth
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.spectreBoots), new Object[]{
                 "L L",
                 "RPR",
                 " B ",
-                Character.valueOf('B'), ACItems.hermesBoots,
-                Character.valueOf('R'), ACItems.enhancedDyeBlend,
-                Character.valueOf('P'), ACItems.enderFabric,
-                Character.valueOf('L'), ACItems.astralThread
+                'B', ACItems.hermesBoots,
+                'R', ACItems.enhancedDyeBlend,
+                'P', ACItems.enderFabric,
+                'L', ACItems.astralThread
         });
 
 
@@ -252,141 +253,141 @@ public class ACRecipes {
                 "F F",
                 "IBI",
                 " L ",
-                Character.valueOf('F'), BTWItems.fabric,
-                Character.valueOf('B'), ACItems.binder,
-                Character.valueOf('L'), ACItems.basicDyeBlend,
-                Character.valueOf('I'), ACItems.linenCloth,
+                'F', BTWItems.fabric,
+                'B', ACItems.binder,
+                'L', ACItems.basicDyeBlend,
+                'I', ACItems.linenCloth,
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.skirt), new Object[]{
                 "A A",
                 "ILI",
                 "FFF",
-                Character.valueOf('F'), BTWItems.fabric,
-                Character.valueOf('L'), ACItems.enhancedDyeBlend,
-                Character.valueOf('A'), ACItems.astralThread,
-                Character.valueOf('I'), ACItems.linenCloth,
+                'F', BTWItems.fabric,
+                'L', ACItems.enhancedDyeBlend,
+                'A', ACItems.astralThread,
+                'I', ACItems.linenCloth,
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.obsidianShield), new Object[]{
                 "ROR",
                 "ODO",
                 "OOO",
-                Character.valueOf('R'), ACItems.reinforcedFabric,
-                Character.valueOf('O'), Block.obsidian,
-                Character.valueOf('D'), Item.diamond,
+                'R', ACItems.reinforcedFabric,
+                'O', Block.obsidian,
+                'D', Item.diamond,
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.steelShield), new Object[]{
                 "ROR",
                 "OSO",
                 "OOO",
-                Character.valueOf('R'), ACItems.reinforcedFabric,
-                Character.valueOf('O'), BTWItems.soulforgedSteelIngot,
-                Character.valueOf('S'), ACItems.obsidianShield,
+                'R', ACItems.reinforcedFabric,
+                'O', BTWItems.soulforgedSteelIngot,
+                'S', ACItems.obsidianShield,
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.monsterNecklace), new Object[]{
                 "TDT",
                 "GAG",
                 "DRD",
-                Character.valueOf('A'), ACItems.tastyTreat,
-                Character.valueOf('G'), Item.goldNugget,
-                Character.valueOf('D'), ACItems.witherDust,
-                Character.valueOf('T'), ACItems.astralThread,
-                Character.valueOf('R'), ACItems.rottenChunk,
+                'A', ACItems.tastyTreat,
+                'G', Item.goldNugget,
+                'D', ACItems.witherDust,
+                'T', ACItems.astralThread,
+                'R', ACItems.rottenChunk,
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.pendantTides), new Object[]{
                 " I ",
                 "RCR",
                 "GMG",
-                Character.valueOf('M'), BTWItems.mysteriousGland,
-                Character.valueOf('C'), BTWItems.creeperOysters,
-                Character.valueOf('G'), ACItems.glassShard,
-                Character.valueOf('I'), Item.dyePowder,
-                Character.valueOf('R'), ACItems.plantyMush,
-                Character.valueOf('S'), Item.silk,
+                'M', BTWItems.mysteriousGland,
+                'C', BTWItems.creeperOysters,
+                'G', ACItems.glassShard,
+                'I', Item.dyePowder,
+                'R', ACItems.plantyMush,
+                'S', BTWTags.strings,
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.pendantSea), new Object[]{
                 "ADA",
                 "VPV",
                 "FMF",
-                Character.valueOf('P'), ACItems.pendantTides,
-                Character.valueOf('M'), BTWItems.mysteriousGland,
-                Character.valueOf('V'), ACItems.voidFragment,
-                Character.valueOf('F'), ACItems.enderFabric,
-                Character.valueOf('A'), ACItems.astralThread,
-                Character.valueOf('D'), Item.diamond,
+                'P', ACItems.pendantTides,
+                'M', BTWItems.mysteriousGland,
+                'V', ACItems.voidFragment,
+                'F', ACItems.enderFabric,
+                'A', ACItems.astralThread,
+                'D', Item.diamond,
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.handStick), new Object[]{
                 " G ",
                 " SB",
                 " S ",
-                Character.valueOf('S'), Item.stick,
-                Character.valueOf('G'), ACItems.mechanicalGlove,
-                Character.valueOf('B'), ACItems.binder,
+                'S', Item.stick,
+                'G', ACItems.mechanicalGlove,
+                'B', ACItems.binder,
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.extendoGrip), new Object[]{
                 "FHF",
                 "SBS",
                 "FRF",
-                Character.valueOf('R'), ACItems.enderRod,
-                Character.valueOf('S'), ACItems.stickyAdhesive,
-                Character.valueOf('H'), ACItems.handStick,
-                Character.valueOf('B'), ACItems.binder,
-                Character.valueOf('F'), ACItems.reinforcedFabric,
+                'R', ACItems.enderRod,
+                'S', ACItems.stickyAdhesive,
+                'H', ACItems.handStick,
+                'B', ACItems.binder,
+                'F', ACItems.reinforcedFabric,
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.gamblersDelight), new Object[]{
                 "POL",
                 "OBO",
                 "LOP",
-                Character.valueOf('O'), Item.bone,
-                Character.valueOf('L'), ACItems.linenCloth,
-                Character.valueOf('P'), ACItems.plantyMush,
-                Character.valueOf('B'), ACItems.binder,
+                'O', Item.bone,
+                'L', ACItems.linenCloth,
+                'P', ACItems.plantyMush,
+                'B', ACItems.binder,
         });
         RecipeManager.addRecipe(new ItemStack(ACItems.gamblersDelight), new Object[]{
                 "LOP",
                 "OBO",
                 "POL",
-                Character.valueOf('O'), Item.bone,
-                Character.valueOf('L'), ACItems.linenCloth,
-                Character.valueOf('P'), ACItems.plantyMush,
-                Character.valueOf('B'), ACItems.binder,
+                'O', Item.bone,
+                'L', ACItems.linenCloth,
+                'P', ACItems.plantyMush,
+                'B', ACItems.binder,
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.gamblersDream), new Object[]{
                 "NBN",
                 "GEG",
                 "NBN",
-                Character.valueOf('B'), ACItems.basicDyeBlend,
-                Character.valueOf('E'), ACItems.emberFabric,
-                Character.valueOf('N'), Item.goldNugget,
-                Character.valueOf('G'), ACItems.gamblersDelight,
+                'B', ACItems.basicDyeBlend,
+                'E', ACItems.emberFabric,
+                'N', Item.goldNugget,
+                'G', ACItems.gamblersDelight,
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.gamblersParadise), new Object[]{
                 "BGB",
                 "TST",
                 "GDG",
-                Character.valueOf('D'), Item.diamond,
-                Character.valueOf('B'), ACItems.enhancedDyeBlend,
-                Character.valueOf('T'), ACItems.astralThread,
-                Character.valueOf('G'), ACItems.gamblersDream,
-                Character.valueOf('S'), Item.netherStar,
+                'D', Item.diamond,
+                'B', ACItems.enhancedDyeBlend,
+                'T', ACItems.astralThread,
+                'G', ACItems.gamblersDream,
+                'S', Item.netherStar,
         });
         RecipeManager.addRecipe(new ItemStack(ACItems.theDice), new Object[]{
                 "FSF",
                 "SGS",
                 "FSF",
-                Character.valueOf('F'), ACItems.reinforcedFabric,
-                Character.valueOf('G'), ACItems.gamblersParadise,
-                Character.valueOf('S'), BTWItems.soulforgedSteelIngot,
+                'F', ACItems.reinforcedFabric,
+                'G', ACItems.gamblersParadise,
+                'S', BTWItems.soulforgedSteelIngot,
         });
 
 
@@ -394,10 +395,10 @@ public class ACRecipes {
                 " I ",
                 "NFN",
                 " S ",
-                Character.valueOf('I'), Item.ingotIron,
-                Character.valueOf('N'), Item.silk,
-                Character.valueOf('F'), BTWItems.fabric,
-                Character.valueOf('S'), Item.stick,
+                'I', Item.ingotIron,
+                'N', BTWTags.strings,
+                'F', BTWItems.fabric,
+                'S', Item.stick,
 
         });
 
@@ -405,9 +406,9 @@ public class ACRecipes {
                 "SSS",
                 "SFS",
                 "SCS",
-                Character.valueOf('S'), Item.stick,
-                Character.valueOf('F'), Item.flint,
-                Character.valueOf('C'), Item.coal,
+                'S', Item.stick,
+                'F', Item.flint,
+                'C', Item.coal,
         });
 
         RecipeManager.addShapelessRecipe(new ItemStack(ACItems.bezoar), new Object[]{
@@ -422,11 +423,11 @@ public class ACRecipes {
                 "IBI",
                 "LGL",
                 "ISI",
-                Character.valueOf('I'), Item.ingotIron,
-                Character.valueOf('B'), ACItems.binder,
-                Character.valueOf('L'), ACItems.industrialTannedLeather,
-                Character.valueOf('G'), BTWItems.gear,
-                Character.valueOf('S'), BTWItems.screw,
+                'I', Item.ingotIron,
+                'B', ACItems.binder,
+                'L', ACItems.industrialTannedLeather,
+                'G', BTWItems.gear,
+                'S', BTWItems.screw,
         });
 
 
@@ -434,9 +435,9 @@ public class ACRecipes {
                 " I ",
                 "ISI",
                 " L ",
-                Character.valueOf('I'), Item.ingotIron,
-                Character.valueOf('S'), BTWItems.stone,
-                Character.valueOf('L'), ACItems.industrialLeather
+                'I', Item.ingotIron,
+                'S', BTWTags.looseRocks,
+                'L', ACItems.industrialLeather
                 // 3x iron ingot, 1x stone, 1x leather
         });
 
@@ -444,9 +445,9 @@ public class ACRecipes {
                 "GGG",
                 "G#G",
                 " R ",
-                Character.valueOf('#'), Item.ingotIron,
-                Character.valueOf('G'), Item.goldNugget,
-                Character.valueOf('R'), Item.redstone
+                '#', Item.ingotIron,
+                'G', Item.goldNugget,
+                'R', Item.redstone
                 // 6x gold nugget, 1x iron ingot, 1x redstone
         });
 
@@ -454,9 +455,9 @@ public class ACRecipes {
                 " A ",
                 "DBD",
                 " A ",
-                Character.valueOf('A'), ACItems.astralThread,
-                Character.valueOf('D'), Item.diamond,
-                Character.valueOf('B'), Item.blazePowder
+                'A', ACItems.astralThread,
+                'D', Item.diamond,
+                'B', Item.blazePowder
                 // 2x astralThread, 2x diamond, 1x blaze powder
                 // astralThread (per craft reference) = 4x silk, 2x glowstone, 1x ghast tear
                 // => expanded: 8x silk, 4x glowstone, 2x ghast tear (for 2x astralThread)
@@ -467,11 +468,11 @@ public class ACRecipes {
                 "DRD",
                 "V#V",
                 "DAD",
-                Character.valueOf('R'), Item.ghastTear,
-                Character.valueOf('D'), Item.redstone,
-                Character.valueOf('V'), ACItems.rottenChunk,
-                Character.valueOf('#'), BTWItems.batWing,
-                Character.valueOf('A'), ACItems.astralThread
+                'R', Item.ghastTear,
+                'D', Item.redstone,
+                'V', ACItems.rottenChunk,
+                '#', BTWItems.batWing,
+                'A', ACItems.astralThread
                 // 1x ghast tear, 2x rotten chunk, 1x soul dust, 1x astralThread
                 // rottenChunk = 1x bone meal, 1x rotten flesh, 1x bone, 1x creeper oyster, 1x dung
                 // astralThread = 4x silk, 2x glowstone, 1x ghast tear
@@ -487,12 +488,12 @@ public class ACRecipes {
                 "GEG",
                 "L#L",
                 "GBG",
-                Character.valueOf('E'), ACItems.enderRod,
-                Character.valueOf('L'), new ItemStack(Item.dyePowder, 1, Color.BLUE.colorID),
-                Character.valueOf('#'), ACItems.enhancedDyeBlend,
-                Character.valueOf('B'), Item.blazePowder,
-                Character.valueOf('G'), Item.goldNugget
-                // 1x enderRod, 2x lapis lazuli, , 1x blaze powder
+                'E', ACItems.enderRod,
+                'L', new ItemStack(Item.dyePowder, 1, Color.BLUE.colorID),
+                '#', ACItems.enhancedDyeBlend,
+                'B', Item.blazePowder,
+                'G', Item.goldNugget
+                // 1x enderRod, 2x lapis lazuli, 1x blaze powder
                 // enderRod = ender pearl + blaze rod OR ender pearl + 2x blaze powder (your existing recipes)
                 // => expanded (vanilla-level where possible):
                 // 1x ender pearl, 1x blaze rod (or 2x blaze powder), 2x lapis, 1x gold nugget, 1x redstone, 1x lapis, 1x blaze powder
@@ -503,10 +504,10 @@ public class ACRecipes {
                 "RSR",
                 "S#S",
                 "RBR",
-                Character.valueOf('S'), ACItems.stoneEffigy,
-                Character.valueOf('#'), ACItems.binder,
-                Character.valueOf('B'), Item.bone,
-                Character.valueOf('R'), BTWItems.stoneBrick
+                'S', ACItems.stoneEffigy,
+                '#', ACItems.binder,
+                'B', Item.bone,
+                'R', BTWTags.stoneBrickItems
                 // 2x stone effigy, 1x binder, 1x bone
                 // stoneEffigy = 3x loose cobblestone, 1x gold nugget, 1x BTW stone
                 // binder = 4x bone OR 4x iron nugget (your dual recipes)
@@ -519,12 +520,12 @@ public class ACRecipes {
                 "HRH",
                 "G#G",
                 "KBK",
-                Character.valueOf('G'), Item.gunpowder,
-                Character.valueOf('R'), BTWItems.brimstone,
-                Character.valueOf('#'), ACItems.voidFragment,
-                Character.valueOf('H'), BTWItems.concentratedHellfire,
-                Character.valueOf('K'), Block.tnt,
-                Character.valueOf('B'), Item.blazePowder
+                'G', Item.gunpowder,
+                'R', BTWItems.brimstone,
+                '#', ACItems.voidFragment,
+                'H', BTWItems.concentratedHellfire,
+                'K', Block.tnt,
+                'B', Item.blazePowder
                 // 3x gunpowder, 1x void fragment, 1x blaze powder
                 // voidFragment = 1x ghast tear, 1x wither dust, 1x loose cobblestone
                 // => expanded (vanilla-level where possible):
@@ -541,11 +542,11 @@ public class ACRecipes {
                 "FAF",
                 "BCB",
                 "FDF",
-                Character.valueOf('A'), ACItems.astralThread,
-                Character.valueOf('B'), ACItems.emberFabric,
-                Character.valueOf('F'), ACItems.enderFabric,
-                Character.valueOf('C'), Item.swordDiamond,
-                Character.valueOf('D'), Item.ghastTear
+                'A', ACItems.astralThread,
+                'B', ACItems.emberFabric,
+                'F', ACItems.enderFabric,
+                'C', Item.swordDiamond,
+                'D', Item.ghastTear
         });
 
         // Crumbling Enchantment - applies crumbling on hit, very expensive, post-Nether
@@ -553,35 +554,35 @@ public class ACRecipes {
                 "V#V",
                 "EGE",
                 "FDF",
-                Character.valueOf('V'), ACItems.voidFragment,
-                Character.valueOf('#'), Block.blockDiamond,
-                Character.valueOf('G'), Item.blazePowder,
-                Character.valueOf('E'), ACItems.enhancedDyeBlend,
-                Character.valueOf('F'), ACItems.reinforcedFabric,
-                Character.valueOf('D'), Item.gunpowder
+                'V', ACItems.voidFragment,
+                '#', Block.blockDiamond,
+                'G', Item.blazePowder,
+                'E', ACItems.enhancedDyeBlend,
+                'F', ACItems.reinforcedFabric,
+                'D', Item.gunpowder
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.velocityEnchantment), new Object[]{
                 "VRV",
                 "ACA",
                 "VSV",
-                Character.valueOf('R'), ACItems.enderRod,
-                Character.valueOf('C'), ACItems.crumblingEnchantment,
-                Character.valueOf('A'), ACItems.astralThread,
-                Character.valueOf('V'), ACItems.voidFragment,
-                Character.valueOf('S'), ACItems.stickyAdhesive
+                'R', ACItems.enderRod,
+                'C', ACItems.crumblingEnchantment,
+                'A', ACItems.astralThread,
+                'V', ACItems.voidFragment,
+                'S', ACItems.stickyAdhesive
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.sweepingEdge), new Object[]{
                 "ASA",
                 "DBD",
                 "PFP",
-                Character.valueOf('A'), ACItems.astralThread,
-                Character.valueOf('B'), ACItems.enderRod,
-                Character.valueOf('S'), Item.swordDiamond,
-                Character.valueOf('D'), ACItems.witherDust,
-                Character.valueOf('F'), ACItems.enderFabric,
-                Character.valueOf('P'), new ItemStack(Item.potion, 1, 8265), // strength for 8 minutes
+                'A', ACItems.astralThread,
+                'B', ACItems.enderRod,
+                'S', Item.swordDiamond,
+                'D', ACItems.witherDust,
+                'F', ACItems.enderFabric,
+                'P', new ItemStack(Item.potion, 1, 8265), // strength for 8 minutes
         });
 
         // Dig Faster - +25% digging speed (early-ore / diamond stage)
@@ -589,51 +590,51 @@ public class ACRecipes {
                 " D ",
                 "IRI",
                 " L ",
-                Character.valueOf('D'), Item.diamond,
-                Character.valueOf('I'), Item.ingotIron,
-                Character.valueOf('R'), Item.redstone,
-                Character.valueOf('L'), Item.leather
+                'D', Item.diamond,
+                'I', Item.ingotIron,
+                'R', Item.redstone,
+                'L', Item.leather
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.woodEnchantment), new Object[]{
                 "WFW",
                 "WBW",
                 "SSS",
-                Character.valueOf('W'), Block.wood,
-                Character.valueOf('F'), Item.rottenFlesh,
-                Character.valueOf('B'), ACItems.binder,
-                Character.valueOf('S'), Item.stick
+                'W', Block.wood,
+                'F', Item.rottenFlesh,
+                'B', ACItems.binder,
+                'S', Item.stick
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.iceSkates), new Object[]{
                 "WSW",
                 "GHG",
                 "SSS",
-                Character.valueOf('S'), new ItemStack(Block.blockSnow),
-                Character.valueOf('G'), ACItems.linenCloth,
-                Character.valueOf('W'), Item.bucketWater,
-                Character.valueOf('H'), ACItems.hermesBoots
+                'S', new ItemStack(BTWBlocks.looseSnow),
+                'G', ACItems.linenCloth,
+                'W', Item.bucketWater,
+                'H', ACItems.hermesBoots
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.waterWalkingBoots), new Object[]{
                 " P ",
                 "HBH",
                 "LLL",
-                Character.valueOf('P'), ACItems.pendantTides,
-                Character.valueOf('H'), ACItems.hermesBoots,
-                Character.valueOf('B'), ACItems.binder,
-                Character.valueOf('L'), ACItems.linenCloth
+                'P', ACItems.pendantTides,
+                'H', ACItems.hermesBoots,
+                'B', ACItems.binder,
+                'L', ACItems.linenCloth
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.lavaWaders), new Object[]{
                 "FEF",
                 "MBM",
                 "ERE",
-                Character.valueOf('E'), ACItems.emberFabric,
-                Character.valueOf('M'), Item.magmaCream,
-                Character.valueOf('B'), ACItems.hermesBoots,
-                Character.valueOf('R'), Item.blazeRod,
-                Character.valueOf('F'), ACItems.reinforcedFabric
+                'E', ACItems.emberFabric,
+                'M', Item.magmaCream,
+                'B', ACItems.hermesBoots,
+                'R', Item.blazeRod,
+                'F', ACItems.reinforcedFabric
         });
 
 
@@ -646,11 +647,11 @@ public class ACRecipes {
                 "AGA",
                 "LSL",
                 "ADA",
-                Character.valueOf('S'), Item.swordIron,
-                Character.valueOf('L'), BTWItems.soulSandPile,
-                Character.valueOf('D'), Item.ghastTear,
-                Character.valueOf('G'), Item.glowstone,
-                Character.valueOf('A'), ACItems.astralThread,
+                'S', Item.swordIron,
+                'L', BTWItems.soulSandPile,
+                'D', Item.ghastTear,
+                'G', Item.glowstone,
+                'A', ACItems.astralThread,
         });
 
     }
@@ -694,65 +695,65 @@ public class ACRecipes {
                 "HBH",
                 "FEF",
                 "HRH",
-                Character.valueOf('F'), BTWItems.fabric,
-                Character.valueOf('E'), Item.enderPearl,
-                Character.valueOf('B'), Item.blazePowder,
-                Character.valueOf('H'), BTWItems.hempFibers,
-                Character.valueOf('R'), ACItems.enderRod,
+                'F', BTWItems.fabric,
+                'E', Item.enderPearl,
+                'B', Item.blazePowder,
+                'H', BTWItems.hempFibers,
+                'R', ACItems.enderRod,
         });
         RecipeManager.addRecipe(new ItemStack(ACItems.emberFabric, 2), new Object[]{
                 "HBH",
                 "FEF",
                 "HBH",
-                Character.valueOf('F'), BTWItems.fabric,
-                Character.valueOf('E'), Item.glowstone,
-                Character.valueOf('B'), Item.blazePowder,
-                Character.valueOf('H'), BTWItems.hempFibers,
+                'F', BTWItems.fabric,
+                'E', Item.glowstone,
+                'B', Item.blazePowder,
+                'H', BTWItems.hempFibers,
                 // 2x hemp fibers, 1x blaze powder, 1x fabric, 0.5x glowstone PER CRAFT
         });
         RecipeManager.addRecipe(new ItemStack(ACItems.astralThread, 8), new Object[]{
                 "STS",
                 "GSG",
                 "STS",
-                Character.valueOf('S'), Item.silk,
-                Character.valueOf('G'), Item.glowstone,
-                Character.valueOf('T'), Item.ghastTear,
+                'S', BTWTags.strings,
+                'G', Item.glowstone,
+                'T', Item.ghastTear,
         });
 
         RecipeManager.addShapelessRecipe(new ItemStack(ACItems.voidFragment), new Object[]{
                 Item.ghastTear,
                 ACItems.witherDust,
-                new ItemStack(BTWBlocks.looseCobblestone)
+                BTWTags.looseCobblestones
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.linenCloth), new Object[]{
                 " S ",
                 "WWW",
                 " S ",
-                Character.valueOf('S'), Item.stick,
-                Character.valueOf('W'), BTWItems.wool,
+                'S', Item.stick,
+                'W', BTWTags.wools,
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.stoneEffigy), new Object[]{
                 " R ",
                 "SGS",
                 " S ",
-                Character.valueOf('S'), new ItemStack(BTWBlocks.looseCobblestone),
-                Character.valueOf('G'), Item.goldNugget,
-                Character.valueOf('R'), BTWItems.stone,
+                'S', BTWTags.looseCobblestones,
+                'G', Item.goldNugget,
+                'R', BTWTags.looseRocks,
         });
 
         RecipeManager.addRecipe(new ItemStack(ACItems.binder), new Object[]{
                 "B B",
                 " B ",
                 "B B",
-                Character.valueOf('B'), Item.bone,
+                'B', Item.bone,
         });
         RecipeManager.addRecipe(new ItemStack(ACItems.binder), new Object[]{
                 "B B",
                 " B ",
                 "B B",
-                Character.valueOf('B'), BTWItems.ironNugget,
+                'B', BTWItems.ironNugget,
         });
 
         RecipeManager.addShapelessRecipe(new ItemStack(ACItems.stickyAdhesive), new Object[]{
@@ -772,10 +773,10 @@ public class ACRecipes {
                 "LBL",
                 "ICI",
                 "LBL",
-                Character.valueOf('B'), new ItemStack(Item.dyePowder, 1, 3), // cocoa powder
-                Character.valueOf('I'), new ItemStack(Item.dyePowder, 1, 0), // ink sac
-                Character.valueOf('L'), new ItemStack(Item.dyePowder, 1, 4), // lapis
-                Character.valueOf('C'), new ItemStack(Item.dyePowder, 1, 15), // bone meal
+                'B', new ItemStack(Item.dyePowder, 1, 3), // cocoa powder
+                'I', new ItemStack(Item.dyePowder, 1, 0), // ink sac
+                'L', new ItemStack(Item.dyePowder, 1, 4), // lapis
+                'C', new ItemStack(Item.dyePowder, 1, 15), // bone meal
                 // just natural plant resources
         });
 
@@ -783,10 +784,10 @@ public class ACRecipes {
                 "LBL",
                 "ICI",
                 "LBL",
-                Character.valueOf('B'), ACItems.witherDust,
-                Character.valueOf('I'), Item.blazePowder,
-                Character.valueOf('L'), BTWItems.soulSandPile,
-                Character.valueOf('C'), ACItems.basicDyeBlend
+                'B', ACItems.witherDust,
+                'I', Item.blazePowder,
+                'L', BTWItems.soulSandPile,
+                'C', ACItems.basicDyeBlend
                 // more advanced dye resources
         });
 
@@ -831,17 +832,17 @@ public class ACRecipes {
                 "IDI",
                 "CFC",
                 "IDI",
-                Character.valueOf('F'), BTWItems.fabric,
-                Character.valueOf('D'), ACItems.enhancedDyeBlend,
-                Character.valueOf('I'), BTWItems.ironNugget,
-                Character.valueOf('C'), ACItems.glassShard
+                'F', BTWItems.fabric,
+                'D', ACItems.enhancedDyeBlend,
+                'I', BTWItems.ironNugget,
+                'C', ACItems.glassShard
         });
         RecipeManager.addRecipe(new ItemStack(ACItems.reinforcedFabric), new Object[]{
                 " S ",
                 "SFS",
                 " S ",
-                Character.valueOf('F'), BTWItems.fabric,
-                Character.valueOf('S'), BTWItems.steelNugget,
+                'F', BTWItems.fabric,
+                'S', BTWItems.steelNugget,
         });
 
         RecipeManager.addMillStoneRecipe(new ItemStack(ACItems.plantyMush, 4), new ItemStack(Block.leaves));
