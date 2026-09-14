@@ -219,9 +219,9 @@ public class ACRecipes {
                 "WCW",
                 "B  ",
                 Character.valueOf('P'), ACItems.plantyMush,
-                Character.valueOf('C'), Item.carrot,
+                Character.valueOf('C'), BTWItems.carrot,
                 Character.valueOf('B'), Item.bone,
-                Character.valueOf('W'), Item.wheat,
+                Character.valueOf('W'), BTWItems.wheat,
         });
 
 
