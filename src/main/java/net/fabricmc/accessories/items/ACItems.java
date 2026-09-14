@@ -247,7 +247,7 @@ public class ACItems {
                         .addTooltip("\2472Deal triple damage, or your own")
                         .addTooltip("\2472damage is reflected onto you")
                         .addTooltip("\247eWe've been spending most our lives")
-                        .addTooltip("\247eliving in a Gamblers Paradise");
+                        .addTooltip("\247eliving in a Gambler's Paradise");
                     theDice = ((AccessoryItem) new AccessoryItem(2630).setUnlocalizedName("acTheDice").setTextureName("acTheDice"))
                             .addTooltip("\2472You deal 0 damage")
                             .addTooltip("\2472Hitting an enemy has a 1% chance")
