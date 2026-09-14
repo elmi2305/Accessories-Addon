@@ -357,7 +357,8 @@ public class ACItems {
         itemSoulSword = ((ItemSoulSword) new ItemSoulSword(2675, EnumToolMaterial.WOOD)
                 .setUnlocalizedName("acSoulSword")
                 .setTextureName("acSoulSword"))
-                .addTooltip("\2472Striking mobs repairs the blade")
+                .addTooltip("\2472Striking mobs restores 1 durability")
+                .addTooltip("\2472Damage scales from 1 to 9 with durability")
                 .addTooltip("\2472At full durability, attacks have a 33%")
                 .addTooltip("\2472chance to make mobs drop loot")
                 .addTooltip("\247eThe grind never ends.");

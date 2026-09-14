@@ -3,8 +3,10 @@ package net.fabricmc.accessories.mixin;
 import btw.community.accessories.ACUtils;
 import btw.community.accessories.AccessoriesProgressData;
 import net.fabricmc.accessories.IPlayerAccessories;
+import net.fabricmc.accessories.ISoulSwordCombatState;
 import net.fabricmc.accessories.items.ACItems;
 import net.fabricmc.accessories.items.AccessoryItem;
+import net.fabricmc.accessories.items.ItemSoulSword;
 import net.minecraft.src.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -18,11 +20,12 @@ import java.util.Arrays;
 import java.util.List;
 
 @Mixin(EntityPlayer.class)
-public abstract class EntityPlayerMixin extends EntityLivingBase implements IPlayerAccessories {
+public abstract class EntityPlayerMixin extends EntityLivingBase implements IPlayerAccessories, ISoulSwordCombatState {
     private float prevTickYaw;
     private float prevTickPitch;
 
     private Entity lastHitEntity;
+    @Unique private boolean soulSwordRepairAllowed;
 
     @Shadow public abstract boolean attackEntityFrom(DamageSource par1DamageSource, float par2);
 
@@ -251,9 +254,26 @@ public abstract class EntityPlayerMixin extends EntityLivingBase implements IPla
     private void storeEnemyHit(Entity par1Entity, CallbackInfo ci){
         this.lastHitEntity = par1Entity;
     }
+
+    @Inject(method = "attackTargetEntityWithCurrentItem", at = @At("HEAD"))
+    private void recordSoulSwordRepairEligibility(Entity target, CallbackInfo ci) {
+        ItemStack heldItem = this.getHeldItem();
+        this.soulSwordRepairAllowed = heldItem != null && heldItem.getItem() instanceof ItemSoulSword
+                && (!(target instanceof EntityLivingBase) || ((EntityLivingBase)target).hurtResistantTime == 0);
+    }
+
+    @Override
+    public boolean accessories$canRepairSoulSword() {
+        return this.soulSwordRepairAllowed;
+    }
     @ModifyArg(method = "attackTargetEntityWithCurrentItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/src/Entity;attackEntityFrom(Lnet/minecraft/src/DamageSource;F)Z"), index = 1)
     private float increaseGivenDamageByPlayer(float par2){
         EntityPlayer obj = ((EntityPlayer) (Object)this);
+        ItemStack heldItem = obj.getHeldItem();
+        if (heldItem != null && heldItem.getItem() instanceof ItemSoulSword) {
+            ItemSoulSword soulSword = (ItemSoulSword)heldItem.getItem();
+            par2 += soulSword.getAttackDamage(heldItem) - ItemSoulSword.BASE_ATTACK_DAMAGE;
+        }
         float damageMult = 1.0f;
         int offset = 0;
         Entity lastHitEntity = this.lastHitEntity;

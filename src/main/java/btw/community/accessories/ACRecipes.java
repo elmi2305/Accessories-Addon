@@ -642,7 +642,7 @@ public class ACRecipes {
 
 
 
-        RecipeManager.addRecipe(new ItemStack(ACItems.itemSoulSword), new Object[]{
+        RecipeManager.addRecipe(new ItemStack(ACItems.itemSoulSword, 1, ACItems.itemSoulSword.getInitialItemDamage()), new Object[]{
                 "AGA",
                 "LSL",
                 "ADA",

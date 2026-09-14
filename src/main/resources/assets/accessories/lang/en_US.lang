@@ -76,6 +76,6 @@ accessories.wither_fruit.info=Eating this fruit permanently unlocks an accessory
 accessories.dragon_fruit.info=Eating this fruit permanently unlocks an accessory slot. It is dropped by the Ender Dragon. Can only be consumed once.
 accessories.glass_shard.info=Dropped when Glass is broken improperly.
 accessories.wither_dust.info=Dropped by Wither Skeletons and Withers.
-accessories.soul_cleaver.info=Striking mobs repairs the Soul Cleaver. At full durability, attacks have a 33% chance to make mobs drop their normal loot.
+accessories.soul_cleaver.info=Striking mobs restores one durability to the Soul Cleaver. Starts off at 1 Damage, scales to 9. At full durability, attacks have a 33% chance to make mobs drop their normal loot.
 key.accessories.special=Accessory Ability
 entity.acFriendlySilverfish.name=Friendly Silverfish
