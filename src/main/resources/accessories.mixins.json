@@ -4,6 +4,8 @@
   "package": "net.fabricmc.accessories.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AccessoryAppearancePlayerMixin",
+    "EntityTrackerEntryMixin",
     "BlockGlassMixin",
     "BlockLogMixin",
     "BlockPortalMixin",
@@ -28,6 +30,7 @@
     "ProgressiveCraftingItemMixin"
   ],
   "client": [
+    "RenderPlayerMixin",
     "BTWPluginMixin",
     "BTWRenderMapperMixin",
     "GameSettingsMixin",

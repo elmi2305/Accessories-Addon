@@ -34,6 +34,15 @@ Most mechanics live in mixins and should query equipped items via `ACUtils` rath
 - Utility and interaction: animal/mob scent items, cat ears and skirt, hand stick/extendo grip, mechanical glove, sewing kit, matches, loot magnet, and wood/digging accessories.
 - Combat: gambling trinkets, whetstone, momentum blade, sweeping edge, and enchantment trinkets for vampirism, lightning, silverfish allies, explosions, katana counters, crumbling, and velocity dashes.
 
+## Third-person appearance
+
+- `AccessoryAppearanceSync` sends `accessories|AP` snapshots from the server: entity ID (int), active slot count (byte), and one item ID (int, `-1` for empty) per maximum slot. The current maximum is nine, including the three progression unlocks; the fixed payload is 41 bytes.
+- `AccessoryAppearancePlayerMixin` broadcasts changes each server tick. `EntityTrackerEntryMixin` sends an initial snapshot immediately after the tracked player's spawn packet.
+- The client-only `AccessoryAppearanceCache` validates packets and discards stale entries on destruction, world changes, and session reset. Same-world respawns retain other players' appearances.
+- `AccessoryRenderer` uses only these snapshots and renders clothing: Cat Ears, Counter Scarf, Skirt, Mechanical Glove, Spring/Hermes/Spectre/Water Walking Boots, Lava Waders, Ice Skates, Monster Necklace, both ocean pendants, and Sun/Moon/Celestial Stones. Carried trinkets, tools, shields, and other accessories have no physical appearance. Ice Skates supply blue boot uppers and blades and take visual priority over other boots; otherwise the existing boot priority applies.
+- `WearableModels` builds shaped clothing meshes with armor clearance, including a hollow pleated skirt and a seated variant, each fitted separately to bare waists, leggings, or chestplates. Cat Ears fit bare heads or helmets; necklace chains follow the skin or chestplate surface. `WearableMesh` maps dedicated 16x16 cloth/metal textures onto the geometry; item icons are never used. See `ASTRA_ACCESSORY_RENDERING_PLAN.md` and `docs/WEARABLE_TEXTURES.md`.
+- In-game validation still requires two clients: equip/unequip, enter tracking range, respawn in the same world, change dimensions, reconnect, and check armor, poses, invisibility, and mixed attachments.
+
 ## Cooldowns
 
 Some `AccessoryItem`s declare a final cooldown and a display color with `setFinalCooldown()` and `setCooldownColor()`. `ACUtils` decrements and resets them. These values are stored on the item instance, so current cooldown state is shared by every stack of that registered item type rather than saved per stack.
