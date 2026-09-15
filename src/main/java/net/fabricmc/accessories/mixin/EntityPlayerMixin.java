@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 import java.util.Arrays;
 import java.util.List;
 
-@Mixin(EntityPlayer.class)
+@Mixin(value = EntityPlayer.class, priority = 1100)
 public abstract class EntityPlayerMixin extends EntityLivingBase implements IPlayerAccessories, ISoulSwordCombatState {
     private float prevTickYaw;
     private float prevTickPitch;
@@ -144,11 +144,10 @@ public abstract class EntityPlayerMixin extends EntityLivingBase implements IPla
 
 
 
-    @ModifyArgs(method = "attackEntityFrom", at = @At(value = "INVOKE", target = "Lnet/minecraft/src/EntityLivingBase;attackEntityFrom(Lnet/minecraft/src/DamageSource;F)Z"))
-    private void lowerTakenDamageBasedOnAccessory(Args args){
+
+    @ModifyVariable(method = "attackEntityFrom", at = @At("HEAD"), argsOnly = true, ordinal = 0)
+    private float lowerTakenDamageBasedOnAccessory(float trueDamage, DamageSource source){
         EntityPlayer obj = ((EntityPlayer) (Object)this);
-        float trueDamage = args.get(1);
-        DamageSource source = args.get(0);
 
         if(source == DamageSource.fall){
             float fFallDamageReduction = 1f;
@@ -159,17 +158,17 @@ public abstract class EntityPlayerMixin extends EntityLivingBase implements IPla
             if(ACUtils.hasAccessory(obj, ACItems.spectreBoots)){
                 fFallDamageReduction *= 0.7f;
             }
-            args.set(1,trueDamage * fFallDamageReduction);
-            return;
+            return trueDamage * fFallDamageReduction;
         }
         if(ACUtils.hasAnyAccessory(obj, ACItems.steelShield) && (source.isExplosion() || source.isProjectile())){
-            args.set(1, trueDamage * 0.9f);
+            trueDamage *= 0.9f;
         }
         if(ACUtils.hasAnyAccessory(obj,ACItems.celestialStone) && !this.worldObj.isDaytime()){
-            args.set(1, trueDamage * 0.94f);
+            trueDamage *= 0.94f;
         }
+        return trueDamage;
     }
-    @Inject(method = "attackEntityFrom", at = @At(value = "INVOKE", target = "Lnet/minecraft/src/EntityLivingBase;attackEntityFrom(Lnet/minecraft/src/DamageSource;F)Z"), cancellable = true)
+    @Inject(method = "attackEntityFrom", at = @At("HEAD"), cancellable = true)
     private void cancelFallDamageBasedOnAccessories(DamageSource source, float par2, CallbackInfoReturnable<Boolean> cir){
         EntityPlayer obj = ((EntityPlayer) (Object) this);
 
