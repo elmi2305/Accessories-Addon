@@ -2,6 +2,7 @@ package net.fabricmc.accessories.mixin;
 
 import btw.community.accessories.ACUtils;
 import net.fabricmc.accessories.EntityFriendlySilverfish;
+import net.fabricmc.accessories.ICombatAccessoryTarget;
 import net.fabricmc.accessories.items.ACItems;
 import net.fabricmc.accessories.items.AccessoryItem;
 import net.minecraft.src.*;
@@ -14,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 @Mixin(EntityLivingBase.class)
-public abstract class EntityLivingBaseMixin extends Entity implements EntityAccessor{
+public abstract class EntityLivingBaseMixin extends Entity implements EntityAccessor, ICombatAccessoryTarget {
     @Unique private int playerJumpCount = 0;
     private boolean isDashing;
 
@@ -105,7 +106,6 @@ public abstract class EntityLivingBaseMixin extends Entity implements EntityAcce
     @Inject(method = "onLivingUpdate", at = @At("HEAD"))
     private void tickLightningBound(CallbackInfo ci) {
         EntityLivingBase self = (EntityLivingBase) (Object) this;
-        if(self instanceof EntityPlayer) return;
         int lightningBoundTicks1 = this.lightningBoundTicks;
 
         if (lightningBoundTicks1 > 0) {
@@ -180,15 +180,23 @@ public abstract class EntityLivingBaseMixin extends Entity implements EntityAcce
 
     @Inject(method = "attackEntityFrom", at = @At("HEAD"))
     private void onAttacked(DamageSource source, float par2, CallbackInfoReturnable<Boolean> cir) {
+        // EntityPlayer has its own hook below so this is not applied twice
+        // when the player method delegates to EntityLivingBase.
+        if ((Object) this instanceof EntityPlayer) return;
+        this.accessories$applyCombatAccessoryEffects(source);
+    }
 
-        // runs both client and server
+    @Override
+    public void accessories$applyCombatAccessoryEffects(DamageSource source) {
+        // Runs on both client and server: the server applies gameplay and the
+        // client supplies the effect particles.
         if (!source.isProjectile() && source.getEntity() instanceof EntityPlayer attacker) {
             ItemStack acc = ACUtils.findAccessory(attacker, s -> s.getItem() == ACItems.lightningEnchantment);
             if (acc != null && acc.getItem() instanceof AccessoryItem item) {
                 if (ACUtils.getActiveCooldown(attacker,item) <= 0)  {
                     this.setLightningBound(40);
                     if (!this.worldObj.isRemote) {
-                        item.setCooldown(item.getFinalCooldown());
+                        ACUtils.setAccessoryCooldown(attacker, item, item.getFinalCooldown());
                     }
                 }
             }
@@ -198,7 +206,7 @@ public abstract class EntityLivingBaseMixin extends Entity implements EntityAcce
                 if (ACUtils.getActiveCooldown(attacker,item) <= 0)  {
                     this.setExplosionBound(60);
                     if (!this.worldObj.isRemote) {
-                        item.setCooldown(item.getFinalCooldown());
+                        ACUtils.setAccessoryCooldown(attacker, item, item.getFinalCooldown());
                     }
                 }
             }
@@ -210,7 +218,7 @@ public abstract class EntityLivingBaseMixin extends Entity implements EntityAcce
                     this.savedPitch = this.rotationPitch;
                     this.savedYaw = this.rotationYaw;
                     if (!this.worldObj.isRemote) {
-                        item.setCooldown(item.getFinalCooldown());
+                        ACUtils.setAccessoryCooldown(attacker, item, item.getFinalCooldown());
                     }
                 }
             }
@@ -221,7 +229,7 @@ public abstract class EntityLivingBaseMixin extends Entity implements EntityAcce
                     attacker.hurtResistantTime = 20;
 
                     if (this.startSwordDash(attacker, this) && !this.worldObj.isRemote) {
-                        item.setCooldown(item.getFinalCooldown());
+                        ACUtils.setAccessoryCooldown(attacker, item, item.getFinalCooldown());
                     }
                 }
             }

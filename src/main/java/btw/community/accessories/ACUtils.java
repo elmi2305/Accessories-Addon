@@ -1,13 +1,21 @@
 package btw.community.accessories;
 
 import net.fabricmc.accessories.IPlayerAccessories;
+import net.fabricmc.accessories.AccessoryAppearanceSync;
 import net.fabricmc.accessories.items.AccessoryItem;
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EntityPlayerMP;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.Minecraft;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
+import net.minecraft.src.Packet250CustomPayload;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 public class ACUtils {
@@ -113,7 +121,87 @@ public class ACUtils {
         Item it = stack.getItem();
         if (!(it instanceof AccessoryItem)) return;
         AccessoryItem acc = (AccessoryItem) it;
-        acc.setCooldown(acc.getFinalCooldown());
+        setAccessoryCooldown(player, acc, acc.getFinalCooldown());
+    }
+
+    public static void setAccessoryCooldown(EntityPlayer player, AccessoryItem accessory, int cooldown) {
+        accessory.setCooldown(cooldown);
+        syncAccessoryCooldown(player, accessory);
+    }
+
+
+    public static void syncAccessoryCooldown(EntityPlayer player, AccessoryItem accessory) {
+        if (player instanceof EntityPlayerMP) {
+            ((EntityPlayerMP) player).playerNetServerHandler.sendPacketToPlayer(createCooldownSyncPacket(player, accessory));
+        }
+    }
+
+    public static Packet250CustomPayload createCooldownSyncPacket(EntityPlayer player) {
+        List<ItemStack> stacks = getAllAccessoriesWithCooldowns(player);
+        ByteBuffer data = ByteBuffer.allocate(1 + stacks.size() * 8);
+        Set<Integer> writtenItems = new HashSet<Integer>();
+
+        int countPosition = data.position();
+        data.put((byte) 0);
+        int count = 0;
+        for (ItemStack stack : stacks) {
+            if (!(stack.getItem() instanceof AccessoryItem accessory) || !writtenItems.add(stack.itemID)) continue;
+            data.putInt(stack.itemID);
+            data.putInt(accessory.getCooldown());
+            count++;
+        }
+        data.put(countPosition, (byte) count);
+
+        byte[] payload = new byte[data.position()];
+        data.flip();
+        data.get(payload);
+        return new Packet250CustomPayload("accessories|CD", payload);
+    }
+
+    public static void applyCooldownSyncPacket(Packet250CustomPayload packet) {
+        if (packet.data == null || packet.length != packet.data.length || packet.data.length < 1) return;
+
+        ByteBuffer data = ByteBuffer.wrap(packet.data);
+        int count = data.get() & 255;
+        if (count > (packet.data.length - 1) / 8 || data.remaining() != count * 8) return;
+
+        for (int i = 0; i < count; i++) {
+            int itemId = data.getInt();
+            int cooldown = data.getInt();
+            if (itemId < 0 || itemId >= Item.itemsList.length || !(Item.itemsList[itemId] instanceof AccessoryItem accessory)) continue;
+            accessory.setCooldown(Math.max(0, Math.min(cooldown, accessory.getFinalCooldown())));
+        }
+    }
+
+    public static void applyLocalAccessoryAppearance(Packet250CustomPayload packet) {
+        if (packet.data == null || packet.length != AccessoryAppearanceSync.PAYLOAD_SIZE || packet.data.length != AccessoryAppearanceSync.PAYLOAD_SIZE) return;
+
+        EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+        if (!(player instanceof IPlayerAccessories)) return;
+
+        ByteBuffer data = ByteBuffer.wrap(packet.data);
+        if (data.getInt() != player.entityId) return;
+        int activeSlots = data.get() & 255;
+        if (activeSlots > AccessoryAppearanceSync.SLOT_COUNT) return;
+
+        IInventory inventory = ((IPlayerAccessories) player).getAccessoryInventory();
+        for (int slot = 0; slot < AccessoryAppearanceSync.SLOT_COUNT; slot++) {
+            int itemId = data.getInt();
+            ItemStack stack = slot < activeSlots && itemId >= 0 && itemId < Item.itemsList.length && Item.itemsList[itemId] != null
+                    ? new ItemStack(itemId, 1, 0)
+                    : null;
+            inventory.setInventorySlotContents(slot, stack);
+        }
+        ((IPlayerAccessories) player).updateAccessoriesFromInventory(inventory);
+    }
+
+    private static Packet250CustomPayload createCooldownSyncPacket(EntityPlayer player, AccessoryItem accessory) {
+        if (!hasAccessory(player, accessory)) return createCooldownSyncPacket(player);
+        ByteBuffer data = ByteBuffer.allocate(9);
+        data.put((byte) 1);
+        data.putInt(accessory.itemID);
+        data.putInt(accessory.getCooldown());
+        return new Packet250CustomPayload("accessories|CD", data.array());
     }
 
     public static int getActiveCooldown(EntityPlayer player, Item accessoryItem) {

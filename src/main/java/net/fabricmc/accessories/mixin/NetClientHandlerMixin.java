@@ -4,6 +4,7 @@ import net.fabricmc.accessories.ContainerAccessories;
 import net.fabricmc.accessories.GuiAccessories;
 import net.fabricmc.accessories.IPlayerAccessories;
 import net.fabricmc.accessories.AccessoryAppearanceSync;
+import btw.community.accessories.ACUtils;
 import net.fabricmc.accessories.client.AccessoryAppearanceCache;
 import net.minecraft.src.*;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,6 +19,11 @@ public class NetClientHandlerMixin {
     private void accessories$appearance(Packet250CustomPayload packet, CallbackInfo ci) {
         if (AccessoryAppearanceSync.CHANNEL.equals(packet.channel)) {
             AccessoryAppearanceCache.accept(packet);
+            ACUtils.applyLocalAccessoryAppearance(packet);
+            ci.cancel();
+        }
+        if ("accessories|CD".equals(packet.channel)) {
+            ACUtils.applyCooldownSyncPacket(packet);
             ci.cancel();
         }
     }
@@ -53,8 +59,7 @@ public class NetClientHandlerMixin {
                     player,
                     packet.slotsCount
             );
-            // Click packets are accepted only when this exactly matches the
-            // container window ID created by the server.
+
             container.windowId = packet.windowId;
             player.openContainer = container;
             Minecraft.getMinecraft().displayGuiScreen(new GuiAccessories(player, container));

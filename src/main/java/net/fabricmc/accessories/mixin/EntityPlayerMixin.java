@@ -4,6 +4,7 @@ import btw.community.accessories.ACUtils;
 import btw.community.accessories.AccessoriesProgressData;
 import net.fabricmc.accessories.IPlayerAccessories;
 import net.fabricmc.accessories.ISoulSwordCombatState;
+import net.fabricmc.accessories.ICombatAccessoryTarget;
 import net.fabricmc.accessories.items.ACItems;
 import net.fabricmc.accessories.items.AccessoryItem;
 import net.fabricmc.accessories.items.ItemSoulSword;
@@ -209,6 +210,11 @@ public abstract class EntityPlayerMixin extends EntityLivingBase implements IPla
                 cir.setReturnValue(false);
             }
         }
+    }
+
+    @Inject(method = "attackEntityFrom", at = @At("HEAD"))
+    private void applyCombatAccessoriesAgainstPlayer(DamageSource source, float damage, CallbackInfoReturnable<Boolean> cir) {
+        ((ICombatAccessoryTarget) (Object) this).accessories$applyCombatAccessoryEffects(source);
     }
     @Unique
     private void doKatanaDamage(EntityLivingBase attacker, EntityPlayer obj, float par2){
@@ -446,11 +452,10 @@ public abstract class EntityPlayerMixin extends EntityLivingBase implements IPla
         ItemStack acc = ACUtils.findAccessory(obj, s -> s.getItem() == ACItems.velocityEnchantment);
         if (acc != null && acc.getItem() instanceof AccessoryItem item) {
             if (ACUtils.getActiveCooldown(obj, item) <= 0) {
-                // Check for block-hit dash
                 if (obj.isBlocking() && obj.isSwingInProgress) {
-                    this.startSwordDash(obj); // No target dash
+                    this.startSwordDash(obj); // no target dash
                     if (!obj.worldObj.isRemote) {
-                        item.setCooldown(item.getFinalCooldown());
+                        ACUtils.setAccessoryCooldown(obj, item, item.getFinalCooldown());
                     }
                 }
             }
@@ -468,7 +473,6 @@ public abstract class EntityPlayerMixin extends EntityLivingBase implements IPla
 
             Block blockBelow = Block.blocksList[obj.worldObj.getBlockId(x, y, z)];
 
-            // Determine if player should be able to walk on this block
             boolean isWater = blockBelow == Block.waterStill || blockBelow == Block.waterMoving;
             boolean isLava = blockBelow == Block.lavaStill || blockBelow == Block.lavaMoving;
 
